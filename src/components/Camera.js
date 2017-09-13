@@ -100,16 +100,15 @@ class Camera extends Component {
   render({}, {isPosing, isStable}) {
     return (
       <Container align="center" isPosing={isPosing} isStable={isStable} m={1}>
-        {isPosing || !this.previousImage ? (
-          <Webcam
-            ref={x => this.webcam = x}
-            audio={false}
-            width={1280}
-            height={960}
-            screenshotFormat="image/png" />
-        ) : null}
+        <Webcam
+          ref={x => this.webcam = x}
+          audio={false}
+          width={1280}
+          height={960}
+          style={{display: isPosing || !this.previousImage ? '' : 'none'}}
+          screenshotFormat="image/png" />
         {isStable === null && !isPosing && this.previousImage ? (
-          <Box mt={2}>
+          <Box>
             <img src={this.previousImage} />
             <Button is="a" w={1} mt={2} bg="green" href={this.previousImage} download="mediocre-picture.png">
               Keep this picture
