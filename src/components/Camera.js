@@ -4,22 +4,29 @@ const { Box, Button } = require('rebass');
 const styled = require('styled-components').default;
 const Webcam = require('react-webcam');
 
-const POSE_DELAY = 1500;
+const POSE_DELAY = 1000;
 const MEASURE_INTERVAL = 500;
 const STABILITY_PERCENTAGE = 7.5;
 
 const Container = styled(Box)`
+  max-width: 20rem;
+
   img,
   video {
     width: 100%;
     height: auto;
   }
 
+  img {
+    border: .5rem solid black;
+  }
+
   video {
-    border: .5rem solid ${props =>
+    border: .5rem solid ${props => props.theme.colors[
       props.isPosing ? props.isStable === null ?
-        'orange' : props.isStable ? 'green' : 'red' : 'black'};
+        'blue' : props.isStable ? 'green' : 'red' : 'black']};
     background-color: black;
+    transition: border-color .25s;
   }
 `;
 
@@ -73,6 +80,8 @@ class Camera extends Component {
   }
 
   pose() {
+    this.previousImage = null;
+    
     this.setState({
       isPosing: true,
       isStable: null
@@ -90,18 +99,26 @@ class Camera extends Component {
 
   render({}, {isPosing, isStable}) {
     return (
-      <Container isPosing={isPosing} isStable={isStable} m={1}>
-        <Webcam
-          ref={x => this.webcam = x}
-          audio={false}
-          screenshotFormat="image/png" />
-        <Button w={1} mt={2} onClick={this.pose} disabled={isPosing}>Pose for picture</Button>
+      <Container align="center" isPosing={isPosing} isStable={isStable} m={1}>
+        {isPosing || !this.previousImage ? (
+          <Webcam
+            ref={x => this.webcam = x}
+            audio={false}
+            width={1280}
+            height={960}
+            screenshotFormat="image/png" />
+        ) : null}
         {isStable === null && !isPosing && this.previousImage ? (
           <Box mt={2}>
             <img src={this.previousImage} />
-            <Button is="a" w={1} mt={2} href={this.previousImage} download="image.png">Download</Button>
+            <Button is="a" w={1} mt={2} bg="green" href={this.previousImage} download="mediocre-picture.png">
+              Keep this picture
+            </Button>
           </Box>
         ) : null}
+        <Button w={1} mt={2} onClick={this.pose} disabled={isPosing}>
+          {isPosing ? 'Try to keep steady…' : `Pose for a${!isPosing && this.previousImage ? 'nother': ''} picture`}
+        </Button>
       </Container>
     );
   }
