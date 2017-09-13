@@ -1,6 +1,6 @@
 # mediocre-pictures
 
-A project generated from [aunty](https://github.com/abcnews/aunty)'s `preact-app` template.
+Helping you take mediocre pictures.
 
 ## Authors
 

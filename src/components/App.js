@@ -1,16 +1,13 @@
-const {h, Component} = require('preact');
-const styles = require('./App.scss');
-const worm = require('./worm.svg');
+const { h } = require('preact');
+const { Flex, Heading } = require('rebass');
 
-class App extends Component {
-  render() {
-    return (
-      <div className={styles.root}>
-        <img className={styles.worm} src={worm} />
-        <h1>mediocre-pictures</h1>
-      </div>
-    );
-  }
-}
+const Camera = require('./Camera');
 
-module.exports = App;
+module.exports = () => (
+    <Flex direction="column" m={1}>
+      <Heading center>Mediocre Pictures</Heading>
+      <Camera />
+    </Flex>
+);
+
+module.exports.displayName = 'App';

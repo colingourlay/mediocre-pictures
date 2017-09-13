@@ -1,21 +1,36 @@
 {
   "name": "mediocre-pictures",
   "version": "1.0.0",
-  "description": "A project generated from aunty's preact-app template.",
+  "description": "Helping you take mediocre pictures.",
   "license": "MIT",
   "private": true,
   "contributors": [
     "Colin Gourlay <colin@colin-gourlay.com>"
   ],
-  "aunty": "preact-app",
+  "aunty": {
+    "type": "preact-app",
+    "deploy": {
+      "apps": {
+        "from": "build",
+        "to": "/home/colin/static/mediocre.pictures"
+      }
+    }
+  },
   "scripts": {
-    "start": "aunty serve"
+    "start": "aunty serve",
+    "release": "aunty build && aunty deploy && open https://mediocre.pictures"
   },
   "devDependencies": {
     "@abcnews/aunty": "5.1.x"
   },
   "dependencies": {
+    "css-wipe": "^4.3.0",
     "preact": "^8.2.5",
-    "preact-compat": "^3.17.0"
+    "preact-compat": "^3.17.0",
+    "react-router-dom": "^4.2.2",
+    "react-webcam": "^0.2.0",
+    "rebass": "^1.0.4",
+    "resemblejs": "^2.2.6",
+    "styled-components": "^2.1.2"
   }
 }
