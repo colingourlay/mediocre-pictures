@@ -1,13 +1,15 @@
 const { h } = require('preact');
-const { Flex, Heading } = require('rebass');
+const { Flex, Link, Small } = require('rebass');
 
 const Camera = require('./Camera');
 
 module.exports = () => (
-    <Flex direction="column" align="center" mx={2} my="10vh">
-      <Heading center>Mediocre Pictures</Heading>
-      <Camera />
-    </Flex>
+  <Flex direction="column" justify="space-between" align="center" style={{height: '100%'}}>
+    <Camera />
+    <Small mb={3} center>
+      Mediocre pictures. By <Link href="https://twitter.com/collypops">@collypops</Link>
+    </Small>
+  </Flex>
 );
 
 module.exports.displayName = 'App';

@@ -13,6 +13,7 @@ const Container = styled(Box)`
 
   img,
   video {
+    border-radius: 4px;
     width: 100%;
     height: auto;
   }
@@ -24,7 +25,7 @@ const Container = styled(Box)`
   video {
     border: .5rem solid ${props => props.theme.colors[
       props.isPosing ? props.isStable === null ?
-        'blue' : props.isStable ? 'green' : 'red' : 'black']};
+        'yellow' : props.isStable ? 'green' : 'red' : 'black']};
     background-color: black;
     transition: border-color .25s;
   }
@@ -99,13 +100,15 @@ class Camera extends Component {
 
   render({}, {isPosing, isStable}) {
     return (
-      <Container align="center" isPosing={isPosing} isStable={isStable} m={1}>
+      <Container align="center" isPosing={isPosing} isStable={isStable} mx={2} mt="10vh">
         <Webcam
           ref={x => this.webcam = x}
           audio={false}
           width={1280}
-          height={960}
-          style={{display: isPosing || !this.previousImage ? '' : 'none'}}
+          height={720}
+          style={{
+            display: isPosing || !this.previousImage ? '' : 'none'
+          }}
           screenshotFormat="image/png" />
         {isStable === null && !isPosing && this.previousImage ? (
           <Box>

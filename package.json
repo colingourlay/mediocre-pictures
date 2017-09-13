@@ -18,7 +18,8 @@
   },
   "scripts": {
     "start": "aunty serve",
-    "release": "aunty build && aunty deploy && open https://mediocre.pictures"
+    "release": "aunty build && aunty deploy",
+    "open": "open https://mediocre.pictures"
   },
   "devDependencies": {
     "@abcnews/aunty": "5.1.x"
