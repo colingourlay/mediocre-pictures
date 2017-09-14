@@ -4,6 +4,7 @@ module.exports = {
     Roboto, Helvetica, Arial, sans-serif
   `,
   sizeRem: '16px',
+  radius: '0',
   fg: '#fff',
   bg: '#ffc100'
 };
