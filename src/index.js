@@ -37,3 +37,7 @@ if (module.hot) {
 if (process.env.NODE_ENV === 'development') {
   require('preact/devtools');
 }
+
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('service-worker.js');
+}

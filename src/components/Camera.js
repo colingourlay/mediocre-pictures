@@ -8,6 +8,17 @@ const POSE_DELAY = 1000;
 const MEASURE_INTERVAL = 500;
 const STABILITY_PERCENTAGE = 7.5;
 
+const Placeholder = styled.div`
+  width: 100%;
+  min-width: 320px;  
+  height: 0;
+  padding-top: 75%;
+
+  * ~ & {
+    display: none;
+  }
+`;
+
 const Frame = styled.div`
   padding: ${props => props.theme.space[2]}px;
   background-color: ${props => props.theme.colors[
@@ -102,19 +113,19 @@ class Camera extends Component {
           <Webcam
             ref={x => this.webcam = x}
             audio={false}
-            width={1280}
-            height={720}
+            width={320}
             screenshotFormat="image/png" />
-          </Frame>
+          <Placeholder />
+        </Frame>
         {isStable === null && !isPosing && this.previousImage ? (
-          <Box>
-            <Frame isPosing={isPosing} isStable={isStable}>
-              <img src={this.previousImage} />
-            </Frame>
-            <Button is="a" w={1} mt={2} bg="green" href={this.previousImage} download="mediocre-picture.png">
-              Keep this picture
-            </Button>
-          </Box>
+        <Box>
+          <Frame isPosing={isPosing} isStable={isStable}>
+            <img src={this.previousImage} />
+          </Frame>
+          <Button is="a" w={1} mt={2} bg="green" href={this.previousImage} download="mediocre-picture.png">
+            Keep this picture
+          </Button>
+        </Box>
         ) : null}
         <Button w={1} mt={2} onClick={this.pose} disabled={isPosing}>
           {isPosing ? 'Strike a pose!' : `Take a${!isPosing && this.previousImage ? 'nother': ''} picture`}
